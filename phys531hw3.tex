@@ -1,0 +1,240 @@
+\documentclass[10pt]{scrartcl}
+\usepackage{psfrag,amsmath,amsfonts,verbatim,mathtools,amssymb}
+%\usepackage[margin=.85in]{geometry}
+\usepackage{fullpage}
+\usepackage[parfill]{parskip}
+\usepackage{bookman}
+\usepackage[small,bf]{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xfrac}
+\usepackage{commath}
+\usepackage{titlesec}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{courier}
+\usepackage[hang]{footmisc} 
+\usepackage{caption}
+
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth}
+\AtBeginDocument{\setlength{\rowidth}{3em}}
+
+\newcommand{\ones}{\mathbf 1}
+\newcommand{\reals}{{\mbox{\bfseries R}}}
+\newcommand{\integers}{{\mbox{\bf Z}}}
+\newcommand{\symm}{{\mbox{\bf S}}} 
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newcommand{\nullspace}{{\mathcal N}}
+\newcommand{\range}{{\mathcal R}}
+\newcommand{\Rank}{\mathop{\bf Rank}}
+\newcommand{\diag}{\mathop{\bf diag}}
+\newcommand{\card}{\mathop{\bf card}}
+\newcommand{\proj}{\mathop{\bf Proj}}
+\newcommand{\conv}{\mathop{\bf conv}}
+\newcommand{\zero}{\mathop{\bf 0}}
+\newcommand{\prox}{\mathbf{prox}}
+
+\newcommand{\Expect}{\mathop{\bf E{}}}
+\newcommand{\Prob}{\mathop{\bf Prob}}
+\newcommand{\Co}{{\mathop {\bf Co}}} 
+\newcommand{\dist}{\mathop{\bf dist{}}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\newcommand{\epi}{\mathop{\bf epi}} 
+\newcommand{\Vol}{\mathop{\bf vol}}
+\newcommand{\dom}{\mathop{\bf dom}} 
+\newcommand{\intr}{\mathop{\bf int}}
+\newcommand{\sign}{\mathop{\bf sign}}
+
+\newcommand{\cf}{{\it cf.}}
+\newcommand{\eg}{{\textit e.g.}}
+\newcommand{\ie}{{\textit i.e.}}
+\newcommand{\etc}{{\it etc.}}
+\bibliographystyle{alpha}
+\newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
+
+
+\usepackage{amsmath}
+
+
+
+\usepackage{titling}
+\setlength{\droptitle}{-2cm}
+
+
+
+\title{Homework 3 for Physics  531}
+\author{Ashok M. Rao}
+
+\begin{document}
+\maketitle
+\pagenumbering{gobble}
+
+\paragraph{Virial Theorem} 
+With $H = \frac{\va{p}^2}{2m} + V(\va{x})$, we can remove vanishing components of the commutator so that $\comm{\va{x}\cdot\va{p}}{H} = \comm{\va{x}}{\va{p}\cdot\va{p}} \frac{\va{p}}{2m} + \va{x}\comm{\va{p}}{V(\va{x})}$. Then,
+\begin{align}
+	\comm{\va{x}\cdot\va{p}}{H} &= i\hslash\left[\sum_i  \left(\delta_{i j} p_j + p_j \delta_{i j}\right) \frac{p_i}{2m} + \sum_{i}x_i \left(-\pdv{V(\va{x})}{x_i}\right)\right]= i\hslash\left(\frac{\va{p}^2}{m} - \va{x}\cdot\nabla V\right)
+\end{align}
+By taking the expectation value of either side and applying the Heisenberg equation of motion as in (2.2.19) we obtain the necessary,
+\begin{align}
+\dv{t}\expval{\va{x}\cdot\va{p}} = \frac{1}{i \hslash}\expval{\comm{\va{x}\cdot\va{p}}{H}} =\frac{\expval{\va{p}}^2}{m} - \expval{\va{x}\cdot\nabla V}
+\end{align}
+For $\Omega = \va{x}\cdot\va{p}$, the LHS of (2) vanishes when $\dv{\expval{\Omega}}{t}=0$, that is when the expectation value of $\Omega$ with respect to some state does not vary with time. In other words, applying Ehrenfest's theorem to the operator $\Omega = \va{x}\cdot\va{p}$, this implies that $
+\dv{t}\expval{\va{x}\cdot\va{p}} = \expval{\pdv{(\va{x}\cdot\va{p})}{t}}$ 
+
+\paragraph{The upside-down harmonic oscillator}
+The upside-down harmonic oscillator has Hamiltonian $H=\frac{p^2}{2m}-\frac{m\omega^2 x^2}{2}$. Given a candidate solution to Schrodinger's equation in the suggested form of $\psi(x, t) = A(t)\exp{-B(t) x^2}$, calculate that 
+\begin{align}
+\pdv{\psi(x, t)}{t} &= \exp{-B x^2}\left[\dv{A}{t} - A x^2 \dv{B}{t}\right]= \psi(x, t)\left[\frac{1}{A}\dv{A}{t} - x^2\dv{B}{t}\right]
+\end{align}
+Solving the Schrodinger equation for one-dimensional potentials gives that
+\begin{align}
+i\hslash\pdv{\psi(x, t)}{t} &=  \psi(x, t)\left[\frac{\hslash^2}{m}B(1 - 2B x^2) + V(x)\right] \\
+&= \psi(x, t)\left[\frac{\hslash^2 B}{m} - x^2\left(\frac{k}{2} + 2\frac{\hslash^2 B^2}{m}\right)\right]
+\end{align}
+The last line obtains by substituting the given inverse potential into (4). Dividing (3) and (5) throughout by $\psi(x, t)$ results in the condition,
+\begin{align}
+	\frac{1}{A}\dv{A}{t} - x^2\dv{B}{t} &= \frac{1}{i\hslash}\left[\frac{\hslash^2}{m} B - x^2\left(\frac{k}{2} + 2\frac{\hslash^2}{m}B^2\right)\right]
+\end{align}
+The desired solution follows trivially by collecting like terms in $x$,
+\begin{align}
+	i\hslash \dv{A}{t} &= \frac{\hslash^2}{m}A B\\
+	i\hslash \dv{B}{t} &= \frac{k}{2} + 2\frac{\hslash^2}{m}B^2 
+\end{align}
+
+With the constants $a$ and $\omega$ as defined, note that $a = \sqrt{\frac{\hslash}{m\omega}}$. Express (8) as 
+\begin{align}
+		i \dv{B}{t} &= \omega\left(\frac{m}{2\hslash}\omega + 2B^2 a^2\right) = \frac{\omega}{2 a^2} + 2B^2 a^2\omega
+\end{align}
+Integrate by parts to solve the separated equation as,
+\begin{align}
+	\int \frac{i}{\frac{\omega}{2 a^2} + 2 a^2 \omega B^2} \dd{B(t)} &= \frac{2 i a^2}{\omega}\int \frac{1}{1 + 4 a^4 B^2} \dd{B(t)}\\
+	&= \frac{i}{\omega}\int\frac{1}{1 + (2 a^2 B)^2}\dd{(2 a^2 B)^2} \\
+	\int 1 \dd{t} &= \frac{i\arctan{(2 a^2 B(t))}}{\omega} + C 
+\end{align}
+This results in, 
+\begin{align}
+B(t) &= \frac{1}{2 a^2}\tan{\left(\frac{\omega}{i}(t + c)\right)} \\
+&= \frac{1}{2 a^2}\tan{(-i\omega t + \phi)}\\
+&= \frac{1}{2a^2}\frac{\sin{2\phi}-i\sinh{2\omega t}}{\cos{2\phi} + \cosh{2\omega t}}
+\end{align}
+where $\phi=-i\omega c$ and the last line follows by definition of the hyperbolic tangent and some substitution.\footnote{Alternatively, solve the differential equation by letting $y(t) = \frac{1}{s a^2}\frac{i v(t)}{\omega}$ the integral becomes $t + c = \int \frac{\dv*{v(t)}{t}}{v(t)^2 - \omega^2}$, which first leads to $-\frac{1}{\omega}\tanh^{-1}\left(\frac{v(t)}{\omega}\right)=t+c$. Solving $v(t) = -w\tanh(\omega(t+c))$ leads us to the another expression for (14) as in $B(t) = -\frac{i\tanh(\omega(t+c))}{2 a^2}$ which corresponds to the alternative form stated in (15).}  
+Note substituting back, we have $\phi = -c\sqrt{-\frac{k}{m}}$. Note the initial condition,
+\begin{align}
+B(0) &= -\frac{1}{x^2}\left(-\frac{x^2}{2 d} -  \ln{\sqrt{2\pi}\left(A\right)} \right) = \frac{1}{2}\left[\frac{1}{d} + \frac{1}{x^2}\ln{(2\pi A^2)}\right]
+\end{align}
+Using (14), we also have that 
+\begin{align}
+\phi = \arctan\left\{\frac{\hslash}{\sqrt{m k}}\left[\frac{1}{d}+\frac{1}{x^2}\ln{(2\pi A^2)}\right]\right\}	
+\end{align}
+Physically, $\phi$ gives an initial phase shift contingent on the spring constant as well as the initial position $x_0$ and dispersion $d$ of the generating wave packet. Using (14) calculate that
+\begin{align}
+\abs{\psi(x, t)} &= \abs{A(t)}\exp{-\frac{x^2}{2 a^2}\left[\tan{(\phi-i\omega t)} + \tan{(\phi+ i\omega t)}\right]} \\
+&= \abs{A(t)}\exp{-\frac{x^2}{2 a^2}\left[\frac{2\sin{(2 \phi)}}{\cos{(2\phi)}+\cosh{(2\phi)}}\right]}
+\end{align}
+Note that for the suggested $A(t) = (2\pi)^{1/4}\left[b\cos(\phi- i \omega t)\right]^{-1/2}$ we have that $A\cdot B$ (ignoring constants factors) has the form,
+\begin{align}
+AB &\sim \frac{i\sinh{(i\phi + t\omega)}}{\cosh{(i\phi+t\omega)}^{3/2}\sin(2\phi)^{1/4}}\\
+i\dv{A}{t} &\sim \frac{i\omega\sinh{\left(\frac{i\phi + t\omega}{2}\right)}\cosh{\left(\frac{i\phi + t\omega}{2}\right)}}{\cosh^{3/2}(i\phi + t\omega)\sin^{1/4}(2\phi)}\\
+&= \frac{i\omega\sinh{(i\phi + t\omega)}}{2\cosh^{3/2}(i\phi + t\omega)\sin^{1/4}(2\phi)}
+\end{align}
+These are equal up to a factor of $\omega$, which follows by multiplying (21) through by $\hslash$ and incorporating the factor of $\frac{1}{2a^2}\cdot\frac{1}{\sqrt{a}}$ into (20).  Putting these together, our wave equation is given by
+\begin{align}
+\psi(x, t) &= \lim_{t\to\infty} \psi(x, t)\left(\frac{1}{(2\pi)^{1/4}}\right)\frac{1}{\sqrt{a\cos{(\phi-i\omega t)}\sqrt{\sin{(2\phi)}}}}\exp{-\frac{x^2}{2 a^2}\tan{(\phi-i\omega t)}}
+\end{align}
+To find the late time behavior, first consider the limit $\lim_{t\to\infty} B(t)$,
+\begin{align}
+	\lim_{t\to\infty} B(t) &= \frac{1}{2 a^2}\lim_{t\to\infty}\frac{\sin{2\phi}-i\sinh{2\omega t}}{\cos{2\phi} + \cosh{2\omega t}}\\
+	&= -\frac{i}{2 a^2}\lim_{t\to\infty}\frac{\tanh{2\omega t}}{1+ \frac{\cos{2\phi}}{\cosh{2\omega t}}}\\
+	&\approx -\frac{i\omega}{2} + i\omega\exp{-2\omega t}\cos{2\phi} + \omega\exp{-2\omega t}\sin{2\phi} + \mathcal{O}\left(\frac{1}{\exp{4\omega t}}\right)
+\end{align}
+Substituting (with some of the simplification through Mathematica), the desired result obtains, that is 
+\begin{align}
+\psi(x, t)\approx \sqrt{\frac{1}{b}\sqrt{\frac{2}{\pi}}}\exp{\frac{i x^2}{2 a^2} - \frac{x^2}{b^2}\exp{-2\omega t} - \frac{\omega t + i\phi}{2}}	
+\end{align}
+To get the limiting expectation value, $\expval{x^2}$ consider that $\abs{\psi(x, t)}^2$ is real and therefore must have probability proportional to the real component of the exponential function. Thus we must evaluate $\expval{x^2}\approx \exp{-2\Re{B(t)}}$. Returning to (26), only one term below fourth exponential order is real, and so  we have 
+\begin{align}
+\abs{\psi}^2 \approx \exp{-2x^2\left(\omega\exp{-2\omega t}\sin{2\phi}\right)}	
+\end{align}
+Completing this as a Gaussian, we have that 
+\begin{align}
+\expval{x^2} &= \frac{\exp{2\omega t}}{4\omega\sin{2\phi}}
+\end{align}
+The function disperses over time.  This appears to correspond to the classical limit, modulo the expectation value. Compute first that,
+\begin{align}
+\pdv{\psi(x, t)}{x} &= - 2AB x\exp{-B x^2} = -2x B(t) \psi(x, t)	
+\end{align}
+This leads to
+\begin{align}
+\left[-i\hslash\pdv{x} - \frac{x}{a^2}\right]\psi &= \left(2 i\hslash B - \frac{1}{a^2}\right)x\psi 	
+\end{align}
+Noting that $p = -i\hslash\pdv{x}$, compute the expectation value of the spread
+\begin{align}
+\expval{\left[p - \frac{x}{a^2}\right]^2} &= \expval{x^2}\abs{2i\hslash B - \frac{1}{a^2}}^2 \\	
+&= \frac{\exp{2\omega t}}{4\omega\sin{2\phi}}\abs{2i\hslash B - \frac{1}{a^2}}^2 \\
+&= \frac{a^2\exp{2\omega t}}{4\sin{2\phi}}\left(\frac{4}{a^4\exp{4\omega t}}\right)\\
+&=\frac{\omega\exp{-2\omega t}}{\sin{2\phi}}
+\end{align}
+If not for $x^2\gg a^2$, it would be incorrect to use $\expval{x^2} = \frac{\exp{2\omega t}}{4\omega\sin{2\phi}}
+$ as in (29) since the coefficient on the highest-order term that is included would not vanish. In this limit, however, we have 
+$\expval{\left[p - \frac{x}{a^2}\right]^2}\to \expval{p^2}$, and clearly the limiting terms commute. Note that $x^2\gg a^2$ is equivalent to $x^2 \ll \omega^2$ and so when the ``frequency" becomes very high, the commutator approaches zero.
+
+
+Noting the commutative relations,
+\begin{align}
+\comm{H}{x_H(0)} &= -i\hslash\frac{p_H(0)}{m}\\
+\comm{H}{x_H(0)} &= i\hslash m\omega^2 x_H(0)
+\end{align}
+apply the Baker-Hausdorff lemma to the equation $x_H(t) = \exp{\frac{iH t}{\hslash}}x_P(0)\exp{-\frac{iH t}{\hslash}}$, where the exponentials are naturally unitary. In fact we obtain,
+\begin{align}
+	x_H(t) &= \exp{\frac{iH t}{\hslash}}x_P(0)\exp{-\frac{iH t}{\hslash}} \\
+	&= x_H(0) + \frac{i t}{\hslash}\comm{H}{x_H(0)} + \frac{i^2 t^2}{2\hslash^2}\comm{H}{\comm{H}{x_H(0)}} + \dots 
+\end{align}
+Due to (36) and (37), we know the nested commutators simply alternate between $x_H(0)$ and $p_H(0)$. More precisely, for terms $i^{2n}$ we have a coefficient $x_H(0)$ and for terms $i^{2n+1}$ we have coefficient $\frac{p_H(0)}{m}$ for integers $n$. These separately constitute the series representation of $\cos{(\cdot)}$ and $\sin{(\cdot)}$ respectively and applying $\omega\to i\omega$
+\begin{align}
+	x_{H}(t) &= x_H(0)\cos{i\omega t} + \left(\frac{p_H(0)}{m\omega}\right)\sin{i\omega t}\\
+	&= x_H(0)\cosh(\omega t) + \left(\frac{p_H(0)}{m\omega}\right)\sinh{\omega t}
+\end{align}
+In series representation in the limit $t\to \infty$
+\begin{align}
+	x_H(t) &\approx \exp{\omega t}\left[\frac{1}{2}\left(x_H(0) + \frac{p_H(0)}{m\omega}\right)\right]
+\end{align}
+In the limit, the particle oscillates around a fixed, time-independent amplitude as would be in the classical situation.
+
+\paragraph{Spin Precession} Compute generally that,
+\begin{align}
+\dv{S_i}{t} &= \frac{1}{i\hslash}\comm{S_i}{H} \\
+&=	\frac{1}{i\hslash}\comm{U^{\dagger} S_{i}^{S}U}{H}\\
+&=\frac{\omega}{i\hslash}U^{\dagger}\comm{S_i}{S_z}U
+\end{align}
+or, in other words, treating the commutator as a Heisenberg operator and bringing forward the $\ket{S_z}$ eigenvalue $\omega$. Naturally, $\dv{S_z}{t} = 0$ and also,
+\begin{align}
+\dv{S_x}{t} &= -\omega U^{\dagger} S_y U \\
+\dv{S_y}{t} &= \omega U^{\dagger} S_x U	
+\end{align}
+The time-evolution operator as in Sakurai (2.1.43) and class is
+\begin{align}
+\mathcal{U}(t) &= \exp{-\frac{i H t}{\hslash}} \\
+&= \mqty(\exp{\frac{-i\omega}{2}} & 0\\ 0 & \exp{\frac{i\omega}{2}})	
+\end{align}
+These lead to the final spin operators,
+\begin{align}
+S_x(t) &= \frac{\hslash}{2}\mqty(0& \exp{i\omega t}\\\exp{-i\omega t}\\ 0) \\
+S_y(t) &= \frac{i \hslash}{2}\mqty(0& -\exp{i\omega t}\\\exp{-i\omega t}\\ 0) \\
+S_z(t) &= S_z(0)	
+\end{align}
+corresponding to the Pauli matrices.\footnote{Specifically, the operators are integrated versions of the differentials previously given. For example, we have that 
+\begin{align*}
+	U^{\dagger}S_x U^{\dagger} &= \frac{\hslash}{2}\mqty(\exp{\frac{i\omega}{2}} & 0\\ 0 & \exp{\frac{-i\omega}{2}})\mqty(0& 1\\1& 0)\mqty(\exp{\frac{-i\omega}{2}} & 0\\ 0 & \exp{\frac{i\omega}{2}})\\
+	&= \frac{\hslash}{2}\mqty(0&\exp{i\omega t}\\ \exp{-i\omega t} & 0)\\
+	U^{\dagger}S_y U^{\dagger} &=\frac{i\hslash}{2}\mqty(0&-\exp{i\omega t}\\ \exp{-i\omega t} & 0)
+\end{align*}
+The integration into the final operators provided is straightforward. }
+
+\end{document}

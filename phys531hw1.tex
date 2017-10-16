@@ -1,0 +1,198 @@
+\documentclass[10pt]{scrartcl}
+\usepackage{psfrag,amsmath,amsfonts,verbatim,mathtools}
+%\usepackage[margin=.85in]{geometry}
+\usepackage{fullpage}
+\usepackage[parfill]{parskip}
+\usepackage{bookman}
+\usepackage[small,bf]{caption}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xfrac}
+\usepackage{commath}
+\usepackage{titlesec}
+\usepackage{physics}
+\usepackage{courier}
+\usepackage[hang]{footmisc} 
+\usepackage{caption}
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth}
+\AtBeginDocument{\setlength{\rowidth}{3em}}
+
+\newcommand{\ones}{\mathbf 1}
+\newcommand{\reals}{{\mbox{\bfseries R}}}
+\newcommand{\integers}{{\mbox{\bf Z}}}
+\newcommand{\symm}{{\mbox{\bf S}}} 
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\newcommand{\nullspace}{{\mathcal N}}
+\newcommand{\range}{{\mathcal R}}
+\newcommand{\Rank}{\mathop{\bf Rank}}
+\newcommand{\diag}{\mathop{\bf diag}}
+\newcommand{\card}{\mathop{\bf card}}
+\newcommand{\proj}{\mathop{\bf Proj}}
+\newcommand{\conv}{\mathop{\bf conv}}
+\newcommand{\zero}{\mathop{\bf 0}}
+\newcommand{\prox}{\mathbf{prox}}
+
+\newcommand{\Expect}{\mathop{\bf E{}}}
+\newcommand{\Prob}{\mathop{\bf Prob}}
+\newcommand{\Co}{{\mathop {\bf Co}}} 
+\newcommand{\dist}{\mathop{\bf dist{}}}
+\newcommand{\argmin}{\mathop{\rm argmin}}
+\newcommand{\argmax}{\mathop{\rm argmax}}
+\newcommand{\epi}{\mathop{\bf epi}} 
+\newcommand{\Vol}{\mathop{\bf vol}}
+\newcommand{\dom}{\mathop{\bf dom}} 
+\newcommand{\intr}{\mathop{\bf int}}
+\newcommand{\sign}{\mathop{\bf sign}}
+
+\newcommand{\cf}{{\it cf.}}
+\newcommand{\eg}{{\textit e.g.}}
+\newcommand{\ie}{{\textit i.e.}}
+\newcommand{\etc}{{\it etc.}}
+\bibliographystyle{alpha}
+
+
+\usepackage{amsmath}
+
+
+
+\usepackage{titling}
+\setlength{\droptitle}{-1cm}
+
+
+
+\title{Homework 1 for Physics  531}
+\author{Ashok M. Rao}
+
+\begin{document}
+\maketitle
+\pagenumbering{gobble}
+
+\paragraph{Problem 1}
+\begin{enumerate}[(a)]
+\item Expand the operator as $\bra{(AB)^{\dagger}a'}\ket{a''}=\mel{a'}{((AB)^{\dagger})^{\dagger}}{a''}$ then conclude
+\begin{align*}
+	\mel{a'}{AB}{a''}&= \braket{B^\dagger A^\dagger a'}{a''}
+\end{align*}
+So $(AB)^\dagger = B^\dagger A^\dagger$. 
+\item Likewise
+\begin{align*}
+\Trace{AB} &=\sum_{a'}\mel{a'}{AB}{a'} \\
+&= \sum_{a', a''}\mel{a'}{A}{a''}\mel{a''}{B}{a'}\\
+&= 	\sum_{a', a''}\mel{a''}{B}{a'}\mel{a'}{A}{a''}\\
+&=\sum_{a''}\mel{a''}{BA}{a''}
+\end{align*}
+which evaluates to $\Trace{BA}$.
+\item Using either of the above
+\begin{align*}
+	\Trace{U^{\dagger} A U} &= \Trace{U U^\dagger A} \\
+	&= \Trace{A}
+\end{align*}
+\item Express the operator function as $f(A) = \sum_{a'} f(a')\ket{a}\bra{a}$ using completeness.
+\end{enumerate}
+
+\paragraph{Problem 2}
+\begin{enumerate}[(a)]
+	\item By inspection it is clear that $\Trace{\sigma_i} = 0$ and $\det{\sigma_i}=-1$ for each Pauli matrix $\sigma_i$. Given that each is two-dimensional it is easy to conclude that all eigenvalues are like $\lambda_{ii}=\pm 1$. 
+	\item Compute that 
+\begin{align*}
+	\mqty(\pmat{1}) \mqty(\pmat{2}) +\mqty(\pmat{2}) \mqty(\pmat{1}) &= 2\mqty(-i & 0\\0 & i) \\
+	\mqty(\pmat{1}) \mqty(\pmat{3}) -\mqty(\pmat{3}) \mqty(\pmat{1}) &= -2\mqty(0 & 1\\-1 & 0) \\
+	\mqty(\pmat{2}) \mqty(\pmat{3}) +\mqty(\pmat{3}) \mqty(\pmat{2}) &= 0
+\end{align*}
+Directly, $\sigma_i\sigma_j = \delta_{ij} + i\epsilon_{ijk}\sigma_k$ follows To find the commutator and anticommutator compute that
+\begin{align*}
+	\comm{\sigma_i}{\sigma_j} &= \delta_{ij} + i\epsilon_{ijk}\sigma_k - \delta_{ji} + i\epsilon_{ijk}\sigma_k \\
+	&= 2i\epsilon_{ijk}\sigma_k \\
+	\acomm{\sigma_i}{\sigma_j}&= \delta_{ij} + i\epsilon_{ijk}\sigma_k + \delta_{ji} - i\epsilon_{ijk}\\
+	&= 2I\delta_{ij}
+\end{align*}
+\item Expand and calculate
+\begin{align*}
+	\exp{i\vb{a}\cdot\va{\sigma}} &= \sum_{n=0}^{\infty}\frac{(-1)^n(\vb{a}\cdot\va{\sigma})^{2n}}{(2n)!} + i\sum_{n=0}^{\infty}\frac{(-1)^n(\vb{a}\cdot\va{\sigma})^{2n}\cdot(\vb{a}\cdot\va{\sigma})}{(2n+1)!} \\
+	&= \sum_{n=0}^{\infty}\frac{(-1)^n\abs{\vb{a}}^{2n}}{(2n)!} + i\sum_{n=0}^{\infty}\frac{(-1)^n\abs{\vb{a}}^{2n+1}}{(2n+1)!}\left(\frac{\vb{a}\cdot\va{\sigma}}{\abs{\vb{a}}}\right)\\
+	&= \cos{\abs{\vb{a}}}+i\frac{\vb{a}\cdot\va{\sigma}}{\abs{\vb{a}}}\sin{\abs{\vb{a}}}
+\end{align*}
+wherein (b) is used to simplify $(\vb{a}\cdot\va{\sigma})^{2n}$ since the cross term in $(\vb{a}\cdot\va{\sigma})^{2} = \sum_{i, j}\vb{a}_i \vb{a}_j\sigma_i\sigma_j = \sum_{i,j} \delta_{ij}\vb{a}_i \vb{a}_j$ due to the fact that $\sigma_i\sigma_j + \sigma_j\sigma_i = 0$ 
+\end{enumerate}
+
+\paragraph{Problem 3}
+\begin{enumerate}[(a)]
+\item Simply decomposing $H$ (without assuming anything further), note that
+\begin{align*}
+	H = \frac{1}{2}\left[(h_{11} + h_{22})I + (h_{12}+h_{21})\sigma_x + i(h_{12}-h_{21})\sigma_y + (h_{11}-h_{22})\sigma_z\right]
+\end{align*}
+Since we have not assumed anything about $H$, the coefficients may be complex. Noting that the trace of $\sigma_i=0$ and for convenience letting $\sigma_0=I$,
+\begin{align*}
+	a_k &= \frac{1}{2}\Trace{(\sigma_k H)}
+\end{align*}
+Yet comparing this with the decomposition above, it's clear that Hermiticity of $H$ is one and the same as requiring real $a_0$ and $\vb{a}$.
+\item Without loss of generality express $H$ as 
+\[H = \mqty(a_0 + a_3 & a_1 - i a_2 \\ a_1 + i a_2 & a_0 - a_3)\]
+Solving the characteristic polynomial,
+\begin{align*}
+	\det{H-\lambda I} &=\lambda^2 -2a_0\lambda + \left[(a_0+a_3)(a_0-a_3)-a_1^2 -a_2^2\right]\\
+	&= \lambda^2 - \lambda\Trace{H} + \det{H}
+\end{align*}
+Solving the quadratic,
+\begin{align*}
+	\lambda &= \frac{1}{2}\left(\Trace{H}\pm\sqrt{\Trace{H}^2 - 4\det{H}}\right)\\
+	&= a_0\pm\sqrt{\vb{a}\cdot\vb{a}}
+\end{align*}
+\item In the additive form $H=a_0 I + \vb{a}\cdot\va{\sigma}$, it is clear that the eigenvectors of $H$ are the same as those for $\vb{a}\cdot\va{\sigma}$ since the first term is just an additive shift. The magnitude on $\sqrt{\vb{a}\cdot\vb{a}}$ may be similarly disregarded for convenience so that the norm goes to unity. We solve for
+\[\ket{H;\pm}=\pm\mqty(a_3 & a_1 - i a_2\\a_1 + i a_2& a_3)\ket{H;\pm}\]
+Solve the problem and this may be written as 
+\begin{align*}
+\ket{H;\pm}&=\qty(\pm\sqrt{a_1^2 +a_2^2}, {a_1 + ia_2}) \\
+&=	\qty(\pm\sqrt{(1+a_3)(1-a_3)}, {a_1 + ia_2}) \\
+&= \frac{1}{\sqrt{2}}\qty(\sqrt{1\pm a_3}, \pm\sqrt{1\mp a_3}\cdot(a_1 + i a_2))\\
+&= \frac{1}{\sqrt{2}}\qty(\sqrt{1\pm a_3}, \pm\sqrt{1\mp a_3}\exp{i\alpha})
+\end{align*}
+Further, from the eigenvalue condition we have that $a_3=\pm (1 + \sqrt{a_1^2 + a_2^2})$ or equivalently $a_1^2 + a_2^2 = (1-a_3^2)\cos^2{\beta} + (1-a_3^2)\sin^2{\beta}$ giving 
+\[\ket{H;+}=\mqty(\cos{(\beta/2)}\\ \sin{(\beta/2)}\cdot\exp{i\alpha}),\quad \ket{H;-}=\mqty(\sin{(\beta/2)}\\-\cos{(\beta/2)}\cdot\exp{i\alpha})\]
+Clearly these are orthogonal and stated both in terms of $a_k$ as well as angles to the axes.
+\item This was done above simply to handle automatically the singularity case where $1+a_3=0$ though as $\beta=\theta$ and $\alpha =\phi$. 
+The eigenvalues are as before though by a shift,
+\[\lambda = a_0 \pm \sqrt{A^2(\vu{n}\cdot\vu{n})} = a_0 \pm A\]
+\end{enumerate}
+
+\paragraph{Problem 4}
+\begin{enumerate}[(a)]
+	\item The set of eigenvalues is $\{-1, 0, 1\}$ which are the only observable measurements.
+	\item Calculate that
+	\begin{align*}
+		\expval{L_x}&=\mel{L_z=1}{L_x}{L_z=1} = 0\\
+		\expval{L_x^2}&=\frac{1}{2}\mqty(1\\0\\0)^T\mqty(0&1&0\\1&0&1\\0&1&0)^2\mqty(1\\0\\0)\\
+		&= \frac{1}{2}\mqty(1\\0\\0)^T\mqty(1&1&0\\1&1&0\\1&0&01)\mqty(1\\0\\0)\\
+		&=\frac{1}{2}
+	\end{align*}
+This gives a calculation for the variance
+\[\expval{(\Delta L_x)^2} = \expval{L_x^2}-\expval{L_x}^2 = \frac{1}{2}\]
+so that the standard deviation is $\Delta L_x = \frac{1}{\sqrt{2}}$.
+\item Since $L_x$ and $L_z$ are compatible operators, they share eigenvalues. The corresponding eigenvectors, in the order of $\{-1, 0, 1\}$ can be found by inspection, and then normalizing gives:
+\begin{align*}
+	\lambda_1 = \qty(1/2, -1/\sqrt{2}, 1/2),\quad \lambda_2 = \qty(1/\sqrt{2},0,-1/\sqrt{2}),\quad \lambda_3=\qty(1/2, 1/\sqrt{2}, 1/2)
+\end{align*}
+	\item The probability of each outcome would be given by $\abs{\braket{L_x}{L_z}}^2$. By symmetry we can conclude that
+	\[\abs{\braket{L_x=-}{L_z=-}}^2 = \abs{\braket{L_x=+}{L_z=-}} = \left(\frac{1}{2}\right)^2\]
+Thus measuring the positive and negative state both have probability $(1/4)$ and the remaining density falls on measuring $L_x=0$ which has probability $(1/2)$. 
+\item $L_x^2$ is diagonal and can be multiplied by inspection, and also it is straightforward that it has eigenvalues $\{0, 1\}$. Thus it must be that the state after the state is $\ket{L_z=\pm 1}$.  Calculate the operator as
+\item \[\left(\ket{L_z=1}\bra{L_z=1} + \ket{L_z=-1}\bra{L_z=-1}\right)\cdot\ket{\psi}\]
+Using the solution from (b) calculate the result to be as $\qty(1/2,0,1/\sqrt{2})$ or which normalizes to $\ket{\psi}=\qty(2/2\sqrt{3},0,2/\sqrt{6})$.  Thus the probability of measuring the two possibilities $L_z=1$ and $L_z=-1$ is $1/3$ and $2/3$ respectively.
+\item Let $\abs{\braket{L_z}{\psi}}$ be coefficients based on the stipulated probabilities. In particular, $\psi = \sum_{a'} a'\ket{L_z}$ so that we can write the coefficients respectively as $\abs{a_{-}}^2 = \abs{a_{+}}^2 = 1/4$ (as from above) and likewise $\abs{a_0}^2 = 1/2$. Taking square roots as in $\sqrt{\abs{a_{+,-,-}}^2}$ yields the coefficients for the expansion on the problem set as required. Finally calculate that
+\item Resubstitute from (b) into (g) so that 
+\begin{align*}
+ \abs{\braket{L_x=0}{\psi}}^2 &= \frac{1}{2}\left(\mqty(1\\0\\-1)^T\mqty((1/2)\exp{i\delta_1}\\(1/\sqrt{2})\exp{i\delta_2}\\ (1/2)\exp{i\delta_3})\right)^2	\\
+ &=\frac{1}{8}\abs{\exp{i\delta_i}-\exp{i\delta_3}}2
+ \end{align*}
+ Apply the identity that $\abs{e^{ix}-e^{iy}}^2 = \left[\Im{e^{ix}}-\Im{e^{iy}}\right]^2 + \left[\Re{e^{ix}}-\Re{e^{iy}}\right]^2$ to conclude:
+ \[P(L_x=0) = \frac{1}{4}\left(1 + \Re{\exp{i(\delta_1-\delta_3)}}\right)=\frac{1+\cos(\delta_1-\delta_3)}{4}\]
+ where the middle result follows from applying the Pythagorean identity on the squared terms, and double-angle identities on the cross terms. In fact, $\delta_2$ is irrelevant though the phase difference between $\delta_1$ and $\delta_3$ affects the final outcome. In particular, the probability $P(L_x=0) = 1/2$ is the maximum and attained when $\delta_1=\delta_3$. Contrarily when $\delta_1 = \delta_3 + \frac{\pi}{2}$ the probability is minimized to $P(L_x=0)=0$, thus the result is entirely determined by relative not absolute phase.
+\end{enumerate}
+
+\end{document}
